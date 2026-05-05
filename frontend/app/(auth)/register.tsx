@@ -1,11 +1,14 @@
+import ScreenWrapper from '@/components/ScreenWrapper';
+import Typo from '@/components/Typo';
+import { colors } from '@/constants/theme';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const Register = () => {
   return (
-    <View>
-      <Text>Register</Text>
-    </View>
+    <ScreenWrapper>
+      <Typo color={colors.white}>Register</Typo>
+    </ScreenWrapper>
   );
 };
 
