@@ -1,4 +1,9 @@
-import { TextProps, TextStyle, ViewStyle } from 'react-native';
+import {
+  TextProps,
+  TextStyle,
+  TouchableOpacityProps,
+  ViewStyle,
+} from 'react-native';
 
 export type TypoProps = {
   size?: number;
@@ -16,3 +21,10 @@ export type ScreenWrapperProps = {
   showPattern?: boolean;
   bgOpacity?: number;
 };
+
+export interface ButtonProps extends TouchableOpacityProps {
+  style?: ViewStyle;
+  onPress?: () => void;
+  loading?: boolean;
+  children: React.ReactNode;
+}
