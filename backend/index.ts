@@ -2,6 +2,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import http from 'http';
+import connectDB from './config/db.ts';
+
 dotenv.config();
 
 const app = express();
@@ -15,6 +17,16 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
 
-server.listen(PORT, () => {
-  console.group('Server is running on port ' + PORT);
-});
+connectDB()
+  .then(() => {
+    console.log('Database Connected');
+    server.listen(PORT, () => {
+      console.log('Server is running on port ' + PORT);
+    });
+  })
+  .catch((error) => {
+    console.log(
+      'Failed to start server due to database connection error: ',
+      error,
+    );
+  });
