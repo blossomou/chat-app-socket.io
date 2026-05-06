@@ -52,7 +52,7 @@ export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'space-around',
     paddingHorizontal: spacingX._20,
     marginVertical: spacingY._10,

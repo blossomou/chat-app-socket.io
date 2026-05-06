@@ -27,7 +27,7 @@ const Register = () => {
 
   const handleSubmit = async () => {
     if (!emailRef.current || !passwordRef.current || !nameRef.current) {
-      Alert.alert('Please fill all the fields');
+      Alert.alert('Sign up', 'Please fill all the fields');
       return;
     }
 
@@ -94,7 +94,7 @@ const Register = () => {
               <View style={{ marginTop: spacingY._25, gap: spacingY._15 }}>
                 <Button loading={isLoading} onPress={handleSubmit}>
                   <Typo fontWeight={'bold'} color={colors.black} size={20}>
-                    Sign Up{' '}
+                    Sign Up
                   </Typo>
                 </Button>
 
