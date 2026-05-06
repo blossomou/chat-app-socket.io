@@ -28,3 +28,9 @@ export interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean;
   children: React.ReactNode;
 }
+
+export type BackButtonProps = {
+  style?: ViewStyle;
+  color?: string;
+  iconSize?: number;
+};
