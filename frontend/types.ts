@@ -1,4 +1,6 @@
 import {
+  TextInput,
+  TextInputProps,
   TextProps,
   TextStyle,
   TouchableOpacityProps,
@@ -34,3 +36,10 @@ export type BackButtonProps = {
   color?: string;
   iconSize?: number;
 };
+
+export interface InputProps extends TextInputProps {
+  icon?: React.ReactNode;
+  containerStyle?: ViewStyle;
+  inputStyle?: TextStyle;
+  inputRef?: React.RefObject<TextInput>;
+}
