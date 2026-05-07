@@ -1,3 +1,78 @@
-export const registerUser = async () => {};
+import bcrypt from 'bcryptjs';
+import type { Request, Response } from 'express';
+import User from '../models/User.ts';
+import { generateToken } from '../utils/token.ts';
 
-export const loginUser = async () => {};
+export const registerUser = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const { email, password, name, avatar } = req.body;
+  try {
+    //check if already exists
+    let user = await User.findOne({ email });
+
+    if (user) {
+      res.status(400).json({ success: false, message: 'User already exists' });
+      return;
+    }
+
+    //Create new user
+    user = new User({
+      email,
+      password,
+      name,
+      avatar: avatar || '',
+    });
+
+    //hash the password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+
+    //save user to database
+    await user.save();
+
+    //gen token
+    const token = generateToken(user);
+
+    res.json({
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.log('error: ', error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
+export const loginUser = async (req: Request, res: Response): Promise<void> => {
+  const { email, password } = req.body;
+  try {
+    //find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(400).json({ success: false, msg: 'Invalid credentials' });
+      return;
+    }
+
+    //compare passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      res.status(400).json({ success: false, msg: 'Invalid credentials' });
+      return;
+    }
+
+    //gen token
+    const token = generateToken(user);
+
+    res.json({
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.log('error: ', error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
+//https://youtu.be/_Y9A7RVIpMQ?list=LL&t=4445
