@@ -13,7 +13,7 @@ export const registerUser = async (
     let user = await User.findOne({ email });
 
     if (user) {
-      res.status(400).json({ success: false, message: 'User already exists' });
+      res.status(400).json({ success: false, msg: 'User already exists' });
       return;
     }
 
@@ -41,7 +41,7 @@ export const registerUser = async (
     });
   } catch (error) {
     console.log('error: ', error);
-    res.status(500).json({ success: false, message: 'Server Error' });
+    res.status(500).json({ success: false, msg: 'Server Error' });
   }
 };
 
@@ -71,7 +71,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     });
   } catch (error) {
     console.log('error: ', error);
-    res.status(500).json({ success: false, message: 'Server Error' });
+    res.status(500).json({ success: false, msg: 'Server Error' });
   }
 };
 
