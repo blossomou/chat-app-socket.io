@@ -43,3 +43,31 @@ export interface InputProps extends TextInputProps {
   inputStyle?: TextStyle;
   inputRef?: React.RefObject<TextInput>;
 }
+
+export type AuthContextProps = {
+  token: string | null;
+  user: UserProps | null;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (
+    email: string,
+    password: string,
+    name: string,
+    avatar?: string,
+  ) => Promise<void>;
+  signOut: () => Promise<void>;
+  updateToken: (token: string) => Promise<void>;
+};
+
+export interface UserProps {
+  email: string;
+  name: string;
+  avatar: string | null;
+  id?: string;
+  //Add any additional fields from the token payload as needed
+}
+
+export interface DecodedTokenProps {
+  user: UserProps;
+  exp: number;
+  iat: number;
+}
