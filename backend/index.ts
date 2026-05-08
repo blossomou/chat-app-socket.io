@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 import connectDB from './config/db.ts';
 import authRoutes from './routes/auth.routes.ts';
+import { initializeSocket } from './socket/socket.ts';
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
+
+//listen to socket events
+initializeSocket(server);
 
 connectDB()
   .then(() => {
