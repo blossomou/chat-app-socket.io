@@ -7,9 +7,22 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 const Home = () => {
-  // https://youtu.be/_Y9A7RVIpMQ?list=LL&t=6248
   const { user, signOut } = useAuth();
   // console.log('user: ', user);
+
+  // useEffect(() => {
+  //   testSocket(testSocketCallbackHandler);
+  //   testSocket(null);
+
+  //   return () => {
+  //     testSocket(testSocketCallbackHandler, true);
+  //   };
+  // }, []);
+
+  // const testSocketCallbackHandler = (data: any) => {
+  //   console.log('got response from testSocket event: ', data);
+  // };
+
   const handleLogout = async () => {
     await signOut();
   };
