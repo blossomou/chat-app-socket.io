@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/authContext';
 import { updateProfile } from '@/socket/socketEvents';
 import { UserDataProps } from '@/types';
 import { scale, verticalScale } from '@/utils/styling';
+import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import * as Icons from 'phosphor-react-native';
 import React, { useEffect, useState } from 'react';
@@ -61,6 +62,20 @@ const ProfileModal = () => {
     });
   }, [user]);
 
+  const onPickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      // allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5,
+    });
+    console.log(result);
+
+    if (!result.canceled) {
+      setUserData({ ...userData, avatar: result.assets[0] });
+    }
+  };
+
   const handleLogout = async () => {
     router.back();
     await signOut();
@@ -111,8 +126,8 @@ const ProfileModal = () => {
 
         <ScrollView contentContainerStyle={styles.form}>
           <View style={styles.avatarContainer}>
-            <Avatar uri={null} size={170} />
-            <TouchableOpacity style={styles.editIcon}>
+            <Avatar uri={userData.avatar} size={170} />
+            <TouchableOpacity style={styles.editIcon} onPress={onPickImage}>
               <Icons.PencilIcon
                 size={verticalScale(20)}
                 color={colors.neutral800}
