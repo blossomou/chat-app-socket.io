@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   TextInput,
   TextInputProps,
@@ -70,4 +71,24 @@ export interface DecodedTokenProps {
   user: UserProps;
   exp: number;
   iat: number;
+}
+
+export type HeaderProps = {
+  title?: string;
+  style?: ViewStyle;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+};
+
+export type AvatarProps = {
+  size?: number;
+  uri: string | null;
+  style?: ViewStyle;
+  isGroup?: boolean;
+};
+
+export interface UserDataProps {
+  name: string;
+  email: string;
+  avatar?: any;
 }
