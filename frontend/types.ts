@@ -92,3 +92,9 @@ export interface UserDataProps {
   email: string;
   avatar?: any;
 }
+
+export type ResponseProps = {
+  success: boolean;
+  data?: any;
+  msg?: string;
+};
